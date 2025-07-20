@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import socialLinks from "@/home/assets/socialLinks.json";
+import socialLinks from "@/assets/socialLinks.json";
 
 // 社交链接提示
 const socialTip = ref("通过这里联系我吧");
