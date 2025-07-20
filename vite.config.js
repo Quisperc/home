@@ -11,6 +11,7 @@ import viteCompression from "vite-plugin-compression";
 // https://vitejs.dev/config/
 export default ({ mode }) =>
   defineConfig({
+    base: '/home/', // 新增：设置静态资源路径前缀
     plugins: [
       vue(),
       AutoImport({
