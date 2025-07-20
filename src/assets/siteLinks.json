@@ -8,5 +8,10 @@
     "icon": "Comment",
     "name": "聊天室",
     "link": "https://chat.swjcq.top/"
+  },
+  {
+    "icon": "LaptopCode",
+    "name": "站点检测",
+    "link": "https://status.aoxc.top/"
   }
 ]
