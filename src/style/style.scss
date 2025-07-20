@@ -47,13 +47,13 @@ a:hover {
 @font-face {
   font-family: "Pacifico-Regular";
   font-display: swap;
-  src: url("/font/Pacifico-Regular.ttf") format("truetype");
+  src: url("#{import.meta.env.BASE_URL}font/Pacifico-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "UnidreamLED";
   font-display: swap;
-  src: url("/font/UnidreamLED.ttf") format("truetype");
+  src: url("#{import.meta.env.BASE_URL}font/UnidreamLED.ttf") format("truetype");
 }
 
 // 基础样式
