@@ -9,34 +9,4 @@
     "name": "聊天室",
     "link": "https://chat.aoxc.top/"
   }
-  // {
-  //   "icon": "Cloud",
-  //   "name": "网盘",
-  //   "link": "https://pan.aoxc.top/"
-  // },
-  // {
-  //   "icon": "CompactDisc",
-  //   "name": "音乐",
-  //   "link": "https://music.aoxc.top/"
-  // },
-  // {
-  //   "icon": "Compass",
-  //   "name": "起始页",
-  //   "link": "https://nav.aoxc.top/"
-  // },
-  // {
-  //   "icon": "Book",
-  //   "name": "网址集",
-  //   "link": "https://web.aoxc.top/"
-  // },
-  // {
-  //   "icon": "Fire",
-  //   "name": "今日热榜",
-  //   "link": "https://hot.aoxc.top/"
-  // },
-  // {
-  //   "icon": "LaptopCode",
-  //   "name": "站点监测",
-  //   "link": "https://status.aoxc.top/"
-  // }
 ]
