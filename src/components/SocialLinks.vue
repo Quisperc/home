@@ -10,8 +10,8 @@
         @mouseenter="socialTip = item.tip"
         @mouseleave="socialTip = '通过这里联系我吧'"
       >
-        <!-- <img class="icon" :src="getIconUrl(item.icon)" height="24" /> -->
-        <img class="icon" :src="item.icon" height="24" />
+        <img class="icon" :src="getIconUrl(item.icon)" height="24" />
+        <!-- <img class="icon" :src="item.icon" height="24" /> -->
       </a>
     </div>
     <span class="tip">{{ socialTip }}</span>
@@ -24,7 +24,7 @@ import socialLinks from "@/assets/socialLinks.json";
 // 社交链接提示
 const socialTip = ref("通过这里联系我吧");
 // 拼接静态资源路径
-// const getIconUrl = (icon) => import.meta.env.BASE_URL + icon;
+const getIconUrl = (icon) => import.meta.env.BASE_URL + icon;
 </script>
 
 <style lang="scss" scoped>
