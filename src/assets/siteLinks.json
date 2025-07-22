@@ -18,5 +18,10 @@
     "icon": "CompactDisc",
     "name": "音乐",
     "link": "https://meting-api.aoxc.top/"
+  },
+  {
+    "icon": "Accusoft",
+    "name": "评论系统",
+    "link": "https://twikoo.aoxc.top/"
   }
 ]

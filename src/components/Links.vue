@@ -71,6 +71,7 @@ const siteIcon = {
   Fire,
   LaptopCode,
   Comment,
+  Accusoft,
 };
 
 // 链接跳转
