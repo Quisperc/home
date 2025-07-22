@@ -13,5 +13,10 @@
     "icon": "LaptopCode",
     "name": "站点检测",
     "link": "https://status.aoxc.top/"
+  },
+  {
+    "icon": "CompactDisc",
+    "name": "音乐",
+    "link": "https://meting-api.aoxc.top/"
   }
 ]
