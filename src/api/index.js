@@ -8,9 +8,9 @@ import fetchJsonp from "fetch-jsonp";
 // 获取音乐播放列表
 export const getPlayerList = async (server, type, id) => {
   const res = await fetch(
-    // `${import.meta.env.VITE_SONG_API}?server=${server}&type=${type}&id=${id}`,
+    `${import.meta.env.VITE_SONG_API}?server=${server}&type=${type}&id=${id}`,
     //修改环境变量没用，所以我直接写死吧
-    `https://meting-api.aoxc.top/api?server=${server}&type=${type}&id=${id}`,
+    //`https://meting-api.aoxc.top/api?server=${server}&type=${type}&id=${id}`,
   );
   const data = await res.json();
 
