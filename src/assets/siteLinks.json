@@ -23,5 +23,10 @@
     "icon": "Book",
     "name": "评论系统",
     "link": "https://twikoo.aoxc.top/"
+  },
+  {
+    "icon": "MailBulk",
+    "name": "邮件服务",
+    "link": "https://mailserver.aoxc.top/"
   }
 ]
