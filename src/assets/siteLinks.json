@@ -26,8 +26,18 @@
   },
   {
     "icon": "FileAlt",
-    "name": "网盘",
+    "name": "云盘",
     "link": "https://cloud.aoxc.top/"
+  },
+  {
+    "icon": "FolderOpen",
+    "name": "Render网盘",
+    "link": "https://rev.aoxc.top/"
+  },
+  {
+    "icon": "FolderOpen",
+    "name": "Leaflow网盘",
+    "link": "https://opan.aoxc.top/"
   },
   {
     "icon": "Book",
