@@ -20,28 +20,23 @@
     "link": "https://meting-api.aoxc.top/"
   },
   {
-    "icon": "MailBulk",
-    "name": "邮件服务",
-    "link": "https://mailserver.aoxc.top/"
-  },
-  {
     "icon": "FileAlt",
-    "name": "云盘",
+    "name": "Cloud云盘",
     "link": "https://cloud.aoxc.top/"
   },
   {
     "icon": "FolderOpen",
-    "name": "Render网盘",
-    "link": "https://rev.aoxc.top/"
-  },
-  {
-    "icon": "FolderOpen",
-    "name": "Leaflow网盘",
-    "link": "https://opan.aoxc.top/"
+    "name": "Open网盘",
+    "link": "https://revs.aoxc.top/"
   },
   {
     "icon": "Book",
     "name": "评论系统",
     "link": "https://twikoo.aoxc.top/"
+  },
+    {
+    "icon": "MailBulk",
+    "name": "邮件服务",
+    "link": "https://qiye.aliyun.com/"
   }
 ]
