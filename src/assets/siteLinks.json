@@ -1,5 +1,10 @@
 [
   {
+    "icon": "Book",
+    "name": "导航",
+    "link": "https://to.aoxc.top/"
+  },
+  {
     "icon": "Blog",
     "name": "博客",
     "link": "https://blog.aoxc.top/"
@@ -10,33 +15,18 @@
     "link": "https://chat.swjcq.top/"
   },
   {
-    "icon": "LaptopCode",
-    "name": "站点检测",
-    "link": "https://status.aoxc.top/"
-  },
-  {
     "icon": "CompactDisc",
     "name": "音乐",
     "link": "https://meting-api.aoxc.top/"
   },
   {
-    "icon": "FileAlt",
-    "name": "Cloud云盘",
-    "link": "https://cloud.aoxc.top/"
-  },
-  {
     "icon": "FolderOpen",
-    "name": "Open网盘",
+    "name": "网盘",
     "link": "https://revs.aoxc.top/"
   },
   {
-    "icon": "Book",
-    "name": "评论系统",
-    "link": "https://twikoo.aoxc.top/"
-  },
-    {
     "icon": "MailBulk",
-    "name": "邮件服务",
+    "name": "邮件",
     "link": "https://qiye.aliyun.com/"
   }
 ]
