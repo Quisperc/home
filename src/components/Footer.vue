@@ -27,6 +27,20 @@
             {{ siteIcp }}
           </a>
         </span>
+        <!-- 公安备案 -->
+        <span>
+          &amp;
+          <a
+            v-if="siteGa"
+            :href="`https://beian.mps.gov.cn/#/query/webSearch?code=${siteGaCode}`"
+            rel="noreferrer"
+            target="_blank"
+          >
+          <img src="/images/备案图标.png" alt="公安备案图标" style="width:16px;height:16px;margin-right:4px;" />
+            {{ siteGa }}
+          </a>
+        </span>
+        
       </div>
       <div v-else class="lrc">
         <Transition name="fade" mode="out-in">
@@ -57,9 +71,11 @@ const startYear = ref(
 );
 const siteIcp = ref(import.meta.env.VITE_SITE_ICP);
 const siteAuthor = ref(import.meta.env.VITE_SITE_AUTHOR);
+const siteGa = ref(import.meta.env.VITE_SITE_GA);
+const siteGaCode = ref(import.meta.env.VITE_SITE_GA_CODE);
 const siteUrl = computed(() => {
   const url = import.meta.env.VITE_SITE_URL;
-  if (!url) return "https://www.Quisper.top";
+  if (!url) return "https://www.civer.cn";
   // 判断协议前缀
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     return "//" + url;
