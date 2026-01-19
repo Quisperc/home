@@ -2,7 +2,7 @@
   {
     "icon": "Book",
     "name": "导航",
-    "link": "https://to.aoxc.top/"
+    "link": "https://go.civer.cn/"
   },
   {
     "icon": "Blog",
@@ -10,14 +10,14 @@
     "link": "https://blog.civer.cn/"
   },
   {
-    "icon": "CompactDisc",
-    "name": "音乐",
-    "link": "https://meting-api.aoxc.top/"
-  },
-  {
     "icon": "FolderOpen",
     "name": "网盘",
-    "link": "https://revs.aoxc.top/"
+    "link": "https://revs.civer.cn/"
+  },
+  {
+    "icon": "CompactDisc",
+    "name": "音乐",
+    "link": "https://meting-api.civer.cn/"
   },
   {
     "icon": "MailBulk",
