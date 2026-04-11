@@ -1,0 +1,27 @@
+[
+  {
+    "icon": "Book",
+    "name": "导航",
+    "link": "https://go.civer.cn/"
+  },
+  {
+    "icon": "Blog",
+    "name": "博客",
+    "link": "https://blog.civer.cn/"
+  },
+  {
+    "icon": "FolderOpen",
+    "name": "网盘",
+    "link": "https://revs.civer.cn/"
+  },
+  {
+    "icon": "CompactDisc",
+    "name": "音乐",
+    "link": "https://meting-api.civer.cn/"
+  },
+  {
+    "icon": "MailBulk",
+    "name": "邮件",
+    "link": "https://qiye.aliyun.com/"
+  }
+]
