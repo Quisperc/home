@@ -61,11 +61,12 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .function {
-  height: 165px;
+  height: 180px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   &.mobile {
     .el-row {
       .el-col {
@@ -105,30 +106,46 @@ onBeforeUnmount(() => {
     .right {
       width: 100%;
       height: 100%;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      transition: all var(--transition-normal);
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      }
     }
     .right {
-      padding: 20px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      animation: fade 0.5s;
+      animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
       .time {
         font-size: 1.1rem;
         text-align: center;
+        color: var(--text-primary);
         .date {
           text-overflow: ellipsis;
           overflow-x: hidden;
           white-space: nowrap;
+          font-weight: 500;
         }
         .text {
-          margin-top: 10px;
-          font-size: 3.25rem;
+          margin-top: 12px;
+          font-size: 3.5rem;
           letter-spacing: 2px;
           font-family: "UnidreamLED";
+          background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         @media (min-width: 1201px) and (max-width: 1280px) {
           font-size: 1rem;
+          .text {
+            font-size: 3rem;
+          }
         }
         @media (min-width: 911px) and (max-width: 992px) {
           font-size: 1rem;
@@ -143,6 +160,10 @@ onBeforeUnmount(() => {
         text-overflow: ellipsis;
         overflow-x: hidden;
         white-space: nowrap;
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        margin-top: 8px;
       }
     }
   }

@@ -95,50 +95,66 @@ onMounted(() => {
 <style lang="scss" scoped>
 .links {
   .line {
-    margin: 2rem 0.25rem 1rem;
+    margin: 2rem 0.25rem 1.5rem;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
-    animation: fade 0.5s;
+    animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
+    .i-icon {
+      color: var(--primary-blue);
+      transition: all var(--transition-normal);
+      &:hover {
+        transform: rotate(15deg) scale(1.1);
+      }
+    }
     .title {
-      margin-left: 8px;
-      font-size: 1.15rem;
-      text-shadow: 0 0 5px #00000050;
+      margin-left: 12px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      color: var(--text-primary);
+      transition: color var(--transition-normal);
+      &:hover {
+        color: var(--primary-green);
+      }
     }
   }
   .swiper {
     left: -10px;
     width: calc(100% + 20px);
-    padding: 5px 10px 0;
+    padding: 10px 10px 20px;
     z-index: 0;
     .swiper-slide {
       height: 100%;
     }
     .swiper-pagination {
-      margin-top: 12px;
+      margin-top: 16px;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       :deep(.swiper-pagination-bullet) {
-        background-color: #fff;
-        width: 20px;
+        background-color: var(--text-muted);
+        width: 24px;
         height: 4px;
-        margin: 0 4px;
+        margin: 0 6px;
         border-radius: 4px;
-        opacity: 0.2;
-        transition: opacity 0.3s;
+        opacity: 0.4;
+        transition: all var(--transition-normal);
         &.swiper-pagination-bullet-active {
           opacity: 1;
+          background-color: var(--primary-blue);
+          width: 32px;
         }
         &:hover {
-          opacity: 1;
+          opacity: 0.8;
+          background-color: var(--primary-blue);
         }
       }
     }
   }
   .link-all {
-    height: 220px;
+    height: 240px;
     .item {
       height: 100px;
       width: 100%;
@@ -146,22 +162,39 @@ onMounted(() => {
       align-items: center;
       flex-direction: row;
       justify-content: center;
-      padding: 0 10px;
-      animation: fade 0.5s;
+      padding: 0 16px;
+      animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      box-shadow: var(--card-shadow);
+      transition: all var(--transition-normal);
 
       &:hover {
-        transform: scale(1.02);
-        background: rgb(0 0 0 / 40%);
-        transition: 0.3s;
+        transform: translateY(-4px) scale(1.03);
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
       }
 
       &:active {
-        transform: scale(1);
+        transform: translateY(0) scale(0.98);
+      }
+
+      .i-icon {
+        color: var(--primary-green);
+        transition: all var(--transition-normal);
+        &:hover {
+          transform: scale(1.2);
+          color: var(--primary-blue);
+        }
       }
 
       .name {
         font-size: 1.1rem;
-        margin-left: 8px;
+        margin-left: 12px;
+        color: var(--text-primary);
+        font-weight: 500;
+        transition: color var(--transition-normal);
+        &:hover {
+          color: var(--primary-blue);
+        }
       }
       @media (min-width: 720px) and (max-width: 820px) {
         .name {
@@ -173,10 +206,11 @@ onMounted(() => {
       }
       @media (max-width: 460px) {
         flex-direction: column;
+        gap: 8px;
         .name {
           font-size: 1rem;
           margin-left: 0;
-          margin-top: 8px;
+          margin-top: 0;
         }
       }
     }

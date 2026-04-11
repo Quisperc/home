@@ -17,14 +17,16 @@
         </section>
       </div>
       <!-- 移动端菜单按钮 -->
-      <Icon
-        class="menu"
-        size="24"
-        v-show="!store.backgroundShow"
-        @click="store.mobileOpenState = !store.mobileOpenState"
-      >
-        <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
-      </Icon>
+      <Transition name="menu-button">
+        <Icon
+          class="menu"
+          size="24"
+          v-show="!store.backgroundShow"
+          @click="store.mobileOpenState = !store.mobileOpenState"
+        >
+          <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
+        </Icon>
+      </Transition>
       <!-- 页脚 -->
       <Transition name="fade" mode="out-in">
         <Footer class="f-ter" v-show="!store.backgroundShow && !store.setOpenState" />
@@ -174,21 +176,39 @@ onBeforeUnmount(() => {
     top: 84%;
     left: calc(50% - 28px);
     width: 56px;
-    height: 34px;
-    background: rgb(0 0 0 / 20%);
-    backdrop-filter: blur(10px);
-    border-radius: 6px;
-    transition: transform 0.3s;
-    animation: fade 0.5s;
+    height: 56px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 50%;
+    transition: all var(--transition-normal);
+    animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s both;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    &:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
     &:active {
       transform: scale(0.95);
     }
     .i-icon {
       transform: translateY(2px);
+      color: var(--text-primary);
+      transition: all var(--transition-normal);
     }
     @media (min-width: 721px) {
       display: none;
     }
+  }
+  // 菜单按钮动画
+  .menu-button-enter-active,
+  .menu-button-leave-active {
+    transition: all var(--transition-normal);
+  }
+  .menu-button-enter-from,
+  .menu-button-leave-to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
   }
   @media (max-height: 720px) {
     overflow-y: auto;
@@ -223,9 +243,9 @@ onBeforeUnmount(() => {
     }
     .menu {
       top: 605.64px; // 721px * 0.84
-      left: 170.5px; // 391 * 0.5 - 25px
+      left: 167.5px; // 391 * 0.5 - 28px
       @media (min-width: 391px) {
-        left: calc(50% - 25px);
+        left: calc(50% - 28px);
       }
     }
     .f-ter {

@@ -80,8 +80,8 @@ onMounted(() => {
 .hitokoto {
   width: 100%;
   height: 100%;
-  padding: 20px;
-  animation: fade 0.5s;
+  padding: 24px;
+  animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s both;
   .open-music {
     width: 100%;
     position: absolute;
@@ -90,38 +90,58 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #00000026;
-    padding: 4px 0;
-    border-radius: 8px 8px 0 0;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 0;
+    border-radius: var(--card-border-radius) var(--card-border-radius) 0 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all var(--transition-normal);
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
     .i-icon {
       width: 18px;
       height: 18px;
       display: block;
       margin-right: 8px;
+      color: var(--primary-green);
     }
     span {
       font-size: 0.95rem;
+      color: var(--text-secondary);
     }
   }
   .content {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
     .text {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       word-break: break-all;
       text-overflow: ellipsis;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: color var(--transition-normal);
+      &:hover {
+        color: var(--primary-blue);
+      }
     }
     .from {
-      margin-top: 10px;
       font-weight: bold;
       align-self: flex-end;
       font-size: 1.1rem;
+      color: var(--text-muted);
+      transition: color var(--transition-normal);
+      &:hover {
+        color: var(--primary-green);
+      }
     }
   }
 }

@@ -3,7 +3,9 @@
   <div class="message">
     <!-- Logo -->
     <div class="logo">
-      <img class="logo-img" :src="siteLogo" alt="logo" />
+      <div class="logo-container">
+        <img class="logo-img" :src="siteLogo" alt="logo" />
+      </div>
       <div :class="{ name: true, 'text-hidden': true, long: siteUrl[0].length >= 6 }">
         <span class="bg">{{ siteUrl[0] }}</span>
         <span class="sm">.{{ siteUrl[1] }}</span>
@@ -12,16 +14,16 @@
     <!-- 简介 -->
     <div class="description cards" @click="changeBox">
       <div class="content">
-        <Icon size="16">
+        <Icon size="16" class="quote-icon">
           <QuoteLeft />
         </Icon>
         <Transition name="fade" mode="out-in">
           <div :key="descriptionText.hello + descriptionText.text" class="text">
-            <p>{{ descriptionText.hello }}</p>
-            <p>{{ descriptionText.text }}</p>
+            <p class="hello-text">{{ descriptionText.hello }}</p>
+            <p class="description-text">{{ descriptionText.text }}</p>
           </div>
         </Transition>
-        <Icon size="16">
+        <Icon size="16" class="quote-icon">
           <QuoteRight />
         </Icon>
       </div>
@@ -93,33 +95,56 @@ watch(
     display: flex;
     flex-direction: row;
     align-items: center;
-    animation: fade 0.5s;
+    animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     max-width: 460px;
-    .logo-img {
-      border-radius: 50%;
-      width: 120px;
+    gap: 24px;
+    .logo-container {
+      position: relative;
+      .logo-img {
+        border-radius: 50%;
+        width: 120px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        transition: all var(--transition-normal);
+        &:hover {
+          transform: rotate(10deg) scale(1.05);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+      }
     }
     .name {
       width: 100%;
-      padding-left: 22px;
       transform: translateY(-8px);
       font-family: "Pacifico-Regular";
-
       .bg {
         font-size: 5rem;
+        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+        transition: transform var(--transition-normal);
+        &:hover {
+          transform: scale(1.05);
+        }
       }
-
       .sm {
-        margin-left: 6px;
+        margin-left: 8px;
         font-size: 2rem;
+        color: var(--text-secondary);
+        transition: color var(--transition-normal);
+        &:hover {
+          color: var(--primary-green);
+        }
         @media (min-width: 721px) and (max-width: 789px) {
           display: none;
         }
       }
     }
     @media (max-width: 768px) {
-      .logo-img {
-        width: 100px;
+      .logo-container {
+        .logo-img {
+          width: 100px;
+        }
       }
       .name {
         height: 128px;
@@ -128,66 +153,85 @@ watch(
         }
       }
     }
-
     @media (max-width: 720px) {
       max-width: 100%;
+      gap: 16px;
     }
   }
 
   .description {
-    padding: 1rem;
+    padding: 1.5rem;
     margin-top: 3.5rem;
     max-width: 460px;
-    animation: fade 0.5s;
-
+    animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
     .content {
       display: flex;
       justify-content: space-between;
-
-      .text {
-        margin: 0.75rem 1rem;
-        line-height: 2rem;
-        margin-right: auto;
-        transition: opacity 0.2s;
-
-        p {
-          &:nth-of-type(1) {
-            font-family: "Pacifico-Regular";
-          }
+      align-items: flex-start;
+      .quote-icon {
+        color: var(--text-muted);
+        transition: all var(--transition-normal);
+        &:hover {
+          color: var(--primary-blue);
+          transform: scale(1.2);
+        }
+        &:nth-of-type(2) {
+          align-self: flex-end;
         }
       }
-
-      .xicon:nth-of-type(2) {
-        align-self: flex-end;
+      .text {
+        margin: 0 1.25rem;
+        line-height: 2rem;
+        margin-right: auto;
+        transition: all var(--transition-normal);
+        .hello-text {
+          font-family: "Pacifico-Regular";
+          font-size: 1.25rem;
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
+          transition: color var(--transition-normal);
+          &:hover {
+            color: var(--primary-green);
+          }
+        }
+        .description-text {
+          font-size: 1rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
       }
     }
     @media (max-width: 720px) {
       max-width: 100%;
       pointer-events: none;
+      padding: 1.25rem;
     }
   }
-  // @media (max-width: 390px) {
-  //   .logo {
-  //     flex-direction: column;
-  //     .logo-img {
-  //       display: none;
-  //     }
-  //     .name {
-  //       margin-left: 0;
-  //       height: auto;
-  //       transform: none;
-  //       text-align: center;
-  //       .bg {
-  //         font-size: 3.5rem;
-  //       }
-  //       .sm {
-  //         font-size: 1.4rem;
-  //       }
-  //     }
-  //   }
-  //   .description {
-  //     margin-top: 2.5rem;
-  //   }
-  // }
+  @media (max-width: 390px) {
+    .logo {
+      flex-direction: column;
+      gap: 12px;
+      .logo-container {
+        .logo-img {
+          width: 80px;
+        }
+      }
+      .name {
+        margin-left: 0;
+        height: auto;
+        transform: none;
+        text-align: center;
+        .bg {
+          font-size: 3.5rem;
+        }
+        .sm {
+          font-size: 1.4rem;
+        }
+      }
+    }
+    .description {
+      margin-top: 2.5rem;
+    }
+  }
 }
 </style>

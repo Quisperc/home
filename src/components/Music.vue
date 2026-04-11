@@ -146,29 +146,43 @@ watch(
 .music {
   width: 100%;
   height: 100%;
-  background: #00000040;
-  backdrop-filter: blur(10px);
-  border-radius: 6px;
-  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--card-border-radius);
+  padding: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  animation: fade 0.5s;
+  animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s both;
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-normal);
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
   .btns {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    margin-bottom: 12px;
+    gap: 12px;
     span {
-      background: #ffffff26;
-      padding: 2px 8px;
-      border-radius: 6px;
-      margin: 0px 6px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: var(--card-border-radius);
       text-overflow: ellipsis;
       overflow-x: hidden;
       white-space: nowrap;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-normal);
       &:hover {
-        background: #ffffff4d;
+        background: rgba(255, 255, 255, 0.3);
+        color: var(--text-primary);
+        transform: translateY(-2px);
+      }
+      &:active {
+        transform: translateY(0);
       }
     }
   }
@@ -178,25 +192,32 @@ watch(
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
+    gap: 24px;
     .state {
-      transition: opacity 0.1s;
+      transition: all var(--transition-normal);
       .i-icon {
         width: 50px;
         height: 50px;
         display: block;
+        color: var(--primary-blue);
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
     .i-icon {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       display: flex;
-      border-radius: 6px;
+      border-radius: 50%;
       align-items: center;
       justify-content: center;
-      border-radius: 6px;
       transform: scale(1);
+      background: rgba(255, 255, 255, 0.1);
+      transition: all var(--transition-normal);
       &:hover {
-        background: #ffffff33;
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
       }
       &:active {
         transform: scale(0.95);
@@ -204,46 +225,54 @@ watch(
     }
   }
   .menu {
-    height: 26px;
+    height: 32px;
     width: 100%;
-    line-height: 26px;
+    line-height: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 12px;
     .name {
       width: 100%;
       text-align: center;
       text-overflow: ellipsis;
       overflow-x: hidden;
       white-space: nowrap;
-      animation: fade 0.3s;
+      animation: fade 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
     }
     .volume {
       width: 100%;
-      padding: 0 12px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
       flex-direction: row;
-      animation: fade 0.3s;
+      animation: fade 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       .icon {
-        margin-right: 12px;
+        margin-right: 16px;
         span {
           width: 24px;
           height: 24px;
           display: block;
+          color: var(--text-secondary);
         }
       }
       :deep(*) {
         transition: none;
       }
       :deep(.el-slider__button) {
-        transition: 0.3s;
+        transition: all var(--transition-normal);
+        &:hover {
+          transform: scale(1.2);
+        }
       }
       .el-slider {
-        margin-right: 12px;
-        --el-slider-main-bg-color: #efefef;
-        --el-slider-runway-bg-color: #ffffff40;
+        margin-right: 16px;
+        --el-slider-main-bg-color: var(--primary-blue);
+        --el-slider-runway-bg-color: rgba(255, 255, 255, 0.2);
         --el-slider-button-size: 16px;
       }
     }
@@ -256,34 +285,46 @@ watch(
   margin: auto;
   width: 100%;
   height: 100%;
-  background-color: #00000080;
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 1;
   .list {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: calc(50% - 300px);
-    left: calc(50% - 320px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 640px;
     height: 600px;
-    background-color: #ffffff66;
-    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--card-border-radius);
     z-index: 999;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     @media (max-width: 720px) {
-      left: calc(50% - 45%);
       width: 90%;
+      height: 80%;
     }
     .close {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 28px;
-      height: 28px;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
       display: block;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-normal);
       &:hover {
         transform: scale(1.2);
+        background: rgba(255, 255, 255, 0.2);
       }
       &:active {
         transform: scale(0.95);
@@ -294,15 +335,15 @@ watch(
 
 // 弹窗动画
 .zoom-enter-active {
-  animation: zoom 0.4s ease-in-out;
+  animation: zoom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .zoom-leave-active {
-  animation: zoom 0.3s ease-in-out reverse;
+  animation: zoom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse;
 }
 @keyframes zoom {
   0% {
     opacity: 0;
-    transform: scale(0) translateY(-600px);
+    transform: scale(0.8) translateY(-600px);
   }
   100% {
     opacity: 1;

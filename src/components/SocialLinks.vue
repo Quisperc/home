@@ -3,17 +3,23 @@
   <div class="social">
     <div class="link">
       <a
-        v-for="item in socialLinks"
+        v-for="(item, index) in socialLinks"
         :key="item.name"
         :href="item.url"
         target="_blank"
         @mouseenter="socialTip = item.tip"
         @mouseleave="socialTip = '通过这里联系我吧'"
+        class="social-link"
+        :style="{ animationDelay: `${index * 0.1}s` }"
       >
-        <img class="icon" :src="item.icon" height="24" />
+        <div class="icon-container">
+          <img class="icon" :src="item.icon" height="24" />
+        </div>
       </a>
     </div>
-    <span class="tip">{{ socialTip }}</span>
+    <Transition name="fade">
+      <span class="tip">{{ socialTip }}</span>
+    </Transition>
   </div>
 </template>
 
@@ -26,20 +32,21 @@ const socialTip = ref("通过这里联系我吧");
 
 <style lang="scss" scoped>
 .social {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 460px;
   width: 100%;
-  height: 42px;
+  height: 56px;
   background-color: transparent;
-  border-radius: 6px;
+  border-radius: var(--card-border-radius);
   backdrop-filter: blur(0);
-  animation: fade 0.5s;
+  animation: fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
   transition:
-    background-color 0.3s,
-    backdrop-filter 0.3s;
+    background-color var(--transition-normal),
+    backdrop-filter var(--transition-normal),
+    box-shadow var(--transition-normal);
   @media (max-width: 840px) {
     max-width: 100%;
     justify-content: center;
@@ -56,29 +63,52 @@ const socialTip = ref("通过这里联系我吧");
     display: flex;
     align-items: center;
     justify-content: center;
-    a {
-      display: inherit;
-      .icon {
-        margin: 0 12px;
-        transition: transform 0.3s;
+    gap: 16px;
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fade 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      .icon-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all var(--transition-normal);
         &:hover {
-          transform: scale(1.1);
+          background-color: rgba(255, 255, 255, 0.2);
+          transform: scale(1.15) rotate(5deg);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         &:active {
-          transform: scale(1);
+          transform: scale(0.95);
+        }
+        .icon {
+          transition: all var(--transition-normal);
+          &:hover {
+            transform: scale(1.2);
+          }
         }
       }
     }
   }
   .tip {
     display: none;
-    margin-right: 12px;
-    animation: fade 0.5s;
+    margin-right: 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    animation: fade 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   @media (min-width: 768px) {
     &:hover {
-      background-color: #00000040;
-      backdrop-filter: blur(5px);
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       .tip {
         display: block;
       }
