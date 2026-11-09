@@ -18,10 +18,15 @@ export function greeting() {
 export function clock() {
   const d = new Date();
   const hm = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const s = d.getSeconds();
+  const m = d.getMinutes();
   return {
     hm,
-    ss: pad(d.getSeconds()),
+    ss: pad(s),
     date: `${d.getMonth() + 1} 月 ${d.getDate()} 日 · 星期${WEEKDAYS[d.getDay()]}`,
+    hourDeg: (d.getHours() % 12) * 30 + m * 0.5,
+    minuteDeg: m * 6 + s * 0.1,
+    secondDeg: s * 6,
   };
 }
 

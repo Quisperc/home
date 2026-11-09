@@ -2,8 +2,27 @@
   <section class="card clock-card">
     <p class="date">{{ now.date }}</p>
     <div class="dial">
-      <time class="time" :datetime="now.hm">{{ now.hm }}</time>
-      <span class="sec" aria-hidden="true">{{ now.ss }}</span>
+      <svg class="face" viewBox="0 0 200 200" role="img" :aria-label="now.hm">
+        <g class="ticks">
+          <line
+            v-for="i in 60"
+            :key="i"
+            x1="100"
+            y1="6"
+            x2="100"
+            :y2="i % 5 === 0 ? 16 : 11"
+            :stroke-width="i % 5 === 0 ? 3 : 1.5"
+            :transform="`rotate(${i * 6} 100 100)`"
+          />
+        </g>
+        <line class="hand hour" x1="100" y1="100" x2="100" y2="58" :transform="`rotate(${now.hourDeg} 100 100)`" />
+        <line class="hand minute" x1="100" y1="100" x2="100" y2="38" :transform="`rotate(${now.minuteDeg} 100 100)`" />
+        <line class="hand second" x1="100" y1="112" x2="100" y2="30" :transform="`rotate(${now.secondDeg} 100 100)`" />
+        <circle class="cap" cx="100" cy="100" r="4.5" />
+      </svg>
+      <time class="digital" :datetime="now.hm">
+        {{ now.hm }}<span class="sec">{{ now.ss }}</span>
+      </time>
     </div>
     <p class="weather">
       <Icon name="cloud" :size="16" />
@@ -42,7 +61,6 @@ onBeforeUnmount(() => clearInterval(timer));
   grid-template-rows: auto 1fr auto;
   gap: 10px;
   padding: 20px;
-  --clock-scale: 30cqi;
 }
 .date {
   font-size: clamp(0.8rem, 3.4cqi, 1rem);
@@ -51,27 +69,53 @@ onBeforeUnmount(() => clearInterval(timer));
   color: var(--md-on-surface-variant);
 }
 .dial {
-  align-self: center;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 1.5cqi;
-  min-width: 0;
+  gap: 8px;
+  min-height: 0;
 }
-.time {
-  font-size: clamp(2.75rem, var(--clock-scale), 10rem);
-  line-height: 0.9;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+/* 圆盘以可用高度为直径，同时填满方形上下与左右 */
+.face {
+  flex: 1;
+  min-height: 0;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+.ticks line {
+  stroke: var(--md-on-surface-variant);
+  opacity: 0.55;
+  stroke-linecap: round;
+}
+.hand {
+  stroke: var(--md-on-surface);
+  stroke-linecap: round;
+}
+.hour {
+  stroke-width: 6;
+}
+.minute {
+  stroke-width: 4;
+}
+.second {
+  stroke: var(--md-primary);
+  stroke-width: 2;
+}
+.cap {
+  fill: var(--md-primary);
+}
+.digital {
+  font-size: clamp(1rem, 5cqi, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   color: var(--md-on-surface);
 }
 .sec {
-  font-size: clamp(0.9rem, 8cqi, 2.4rem);
-  line-height: 1;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  margin-top: 0.28em;
+  margin-left: 0.2em;
+  font-size: 0.7em;
   color: var(--md-primary);
 }
 .weather {
