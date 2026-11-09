@@ -17,9 +17,11 @@ export function greeting() {
 
 export function clock() {
   const d = new Date();
+  const hm = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
   return {
-    time: `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`,
-    date: `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日 · 星期${WEEKDAYS[d.getDay()]}`,
+    hm,
+    ss: pad(d.getSeconds()),
+    date: `${d.getMonth() + 1} 月 ${d.getDate()} 日 · 星期${WEEKDAYS[d.getDay()]}`,
   };
 }
 

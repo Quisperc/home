@@ -46,11 +46,7 @@
                     <span>{{ opt.label }}</span>
                   </label>
                 </div>
-                <button
-                  v-if="settings.wallpaper === 'local'"
-                  class="text-btn"
-                  @click="$emit('shuffle')"
-                >
+                <button class="text-btn" @click="$emit('shuffle')">
                   <Icon name="refresh" :size="18" />换一张
                 </button>
               </div>
@@ -97,6 +93,8 @@ const themes = [
 const wallpapers = [
   { label: "内置渐变", value: "local" },
   { label: "每日一图", value: "bing" },
+  { label: "原神", value: "genshin" },
+  { label: "二次元", value: "acg" },
 ];
 
 const onKeydown = (e) => e.key === "Escape" && close();

@@ -1,6 +1,6 @@
 <template>
   <div class="background" aria-hidden="true">
-    <img v-if="isBing" :key="bingKey" :src="BING" alt="" @load="onLoad" @error="onError" />
+    <img v-if="isImage" :key="imgKey" :src="imgUrl" alt="" @load="onLoad" @error="onError" />
     <div v-else class="gradient" :style="{ background: gradient.css }" />
   </div>
 </template>
@@ -10,19 +10,28 @@ import { computed, ref, watch } from "vue";
 import { settings } from "@/lib/settings";
 import { GRADIENTS, extractSeed, setWallpaperSeed } from "@/lib/theme";
 
-const BING = "https://api.dujin.org/bing/1920.php";
+// 公开随机图 API（302 直返图片）；加载失败回退内置渐变
+const SOURCES = {
+  bing: "https://api.dujin.org/bing/1920.php",
+  genshin: "https://v2.xxapi.cn/api/ys?return=302",
+  acg: "https://v2.xxapi.cn/api/randomAcgPic?type=pc&return=302",
+};
 const index = ref(Math.floor(Math.random() * GRADIENTS.length));
-const bingKey = ref(0);
-const bingFailed = ref(false);
+const imgKey = ref(0);
+const failed = ref(false);
 
-const isBing = computed(() => settings.wallpaper === "bing" && !bingFailed.value);
+const isImage = computed(() => !!SOURCES[settings.wallpaper] && !failed.value);
+const imgUrl = computed(() => SOURCES[settings.wallpaper]);
 const gradient = computed(() => GRADIENTS[index.value % GRADIENTS.length]);
 
 watch(
-  [isBing, index],
+  () => settings.wallpaper,
+  () => (failed.value = false),
+);
+watch(
+  [isImage, index],
   () => {
-    if (!isBing.value) setWallpaperSeed(gradient.value.seed);
-    else bingFailed.value = false;
+    if (!isImage.value) setWallpaperSeed(gradient.value.seed);
   },
   { immediate: true },
 );
@@ -31,9 +40,9 @@ const onLoad = (e) => {
   const seed = extractSeed(e.target);
   if (seed) setWallpaperSeed(seed);
 };
-const onError = () => (bingFailed.value = true);
+const onError = () => (failed.value = true);
 const shuffle = () => {
-  if (isBing.value) bingKey.value++;
+  if (isImage.value) imgKey.value++;
   else index.value = (index.value + 1) % GRADIENTS.length;
 };
 defineExpose({ shuffle });

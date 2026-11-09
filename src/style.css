@@ -4,6 +4,8 @@
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --radius-card: 28px;
   --radius-tile: 16px;
+  --glass-spec: 42%;
+  --glass-sheen: 10%;
 }
 
 :root[data-theme="light"] {
@@ -11,6 +13,8 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --glass-spec: 16%;
+  --glass-sheen: 6%;
 }
 
 * {
@@ -55,17 +59,46 @@ img {
   display: block;
 }
 
-/* 卡片：M3 surface-container + iOS widget  vibrancy（半透明模糊） */
+/* 卡片：Liquid Glass（半透明 + 折射高光 + 光泽），色彩 token 由 theme.js 注入 */
 .card {
-  background: color-mix(in srgb, var(--md-surface-container) 78%, transparent);
-  -webkit-backdrop-filter: blur(24px) saturate(1.6);
-  backdrop-filter: blur(24px) saturate(1.6);
+  background:
+    linear-gradient(
+      155deg,
+      rgb(255 255 255 / var(--glass-sheen)),
+      rgb(255 255 255 / calc(var(--glass-sheen) * 0.35)) 30%,
+      transparent 55%
+    ),
+    color-mix(in srgb, var(--md-surface-container) 68%, transparent);
+  -webkit-backdrop-filter: blur(30px) saturate(1.8);
+  backdrop-filter: blur(30px) saturate(1.8);
+  border: 1px solid color-mix(in srgb, var(--md-on-surface) 10%, transparent);
   border-radius: var(--radius-card);
   padding: 24px;
   box-shadow:
-    0 1px 2px rgb(0 0 0 / 0.3),
-    0 2px 6px 2px rgb(0 0 0 / 0.15);
+    inset 0 1px 0 rgb(255 255 255 / var(--glass-spec)),
+    inset 0 0 0 1px rgb(255 255 255 / 4%),
+    inset 0 -1px 0 rgb(0 0 0 / 10%),
+    0 8px 24px -10px rgb(0 0 0 / 0.28),
+    0 2px 6px rgb(0 0 0 / 0.1);
   animation: rise 0.5s var(--ease) backwards;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card {
+    background: var(--md-surface-container);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .card {
+    background: var(--md-surface-container);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  .card {
+    background: color-mix(in srgb, var(--md-surface-container) 94%, transparent);
+    border-color: var(--md-outline-variant);
+  }
 }
 
 .card-title {

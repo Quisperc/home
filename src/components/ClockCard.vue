@@ -1,14 +1,14 @@
 <template>
   <section class="card clock-card">
-    <div class="card-title"><Icon name="schedule" :size="20" />现在时间</div>
-    <time class="time">{{ now.time }}</time>
     <p class="date">{{ now.date }}</p>
+    <div class="dial">
+      <time class="time" :datetime="now.hm">{{ now.hm }}</time>
+      <span class="sec" aria-hidden="true">{{ now.ss }}</span>
+    </div>
     <p class="weather">
-      <Icon name="cloud" :size="18" />
-      <span v-if="weather">
-        {{ weather.city }} · {{ weather.text }} {{ weather.temp }}℃ · {{ weather.wind }}
-      </span>
-      <span v-else>{{ weatherError ? "天气信息暂不可用" : "天气加载中…" }}</span>
+      <Icon name="cloud" :size="16" />
+      <span v-if="weather">{{ weather.city }} · {{ weather.text }} {{ weather.temp }}℃</span>
+      <span v-else>{{ weatherError ? "天气暂不可用" : "天气加载中…" }}</span>
     </p>
   </section>
 </template>
@@ -36,30 +36,53 @@ onBeforeUnmount(() => clearInterval(timer));
 
 <style scoped>
 .clock-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.clock-card .card-title {
-  margin-bottom: 0;
-}
-.time {
-  margin-top: auto;
-  font-size: clamp(3rem, 6vw, 4.6rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-  color: var(--md-primary);
+  container-type: inline-size;
+  container-name: clock;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+  padding: 20px;
+  --clock-scale: 30cqi;
 }
 .date {
+  font-size: clamp(0.8rem, 3.4cqi, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
   color: var(--md-on-surface-variant);
+}
+.dial {
+  align-self: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5cqi;
+  min-width: 0;
+}
+.time {
+  font-size: clamp(2.75rem, var(--clock-scale), 10rem);
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--md-on-surface);
+}
+.sec {
+  font-size: clamp(0.9rem, 8cqi, 2.4rem);
+  line-height: 1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.28em;
+  color: var(--md-primary);
 }
 .weather {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: auto;
-  font-size: 0.9rem;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: clamp(0.78rem, 3.2cqi, 0.9rem);
   color: var(--md-on-surface-variant);
+  background: color-mix(in srgb, var(--md-surface-container-high) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--md-on-surface) 8%, transparent);
 }
 </style>
