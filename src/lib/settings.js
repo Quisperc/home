@@ -4,7 +4,7 @@ const KEY = "home-settings";
 const defaults = {
   theme: "system", // light | dark | system
   seed: "auto", // auto = 跟随壁纸取色，或 #rrggbb
-  wallpaper: "local", // local | bing
+  wallpaper: "acg", // local | bing | genshin | acg（默认二次元）
   siteStartShow: true,
 };
 
