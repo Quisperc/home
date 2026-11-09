@@ -1,0 +1,32 @@
+[
+  {
+    "icon": "book",
+    "name": "导航",
+    "link": "https://go.civer.cn/"
+  },
+  {
+    "icon": "article",
+    "name": "博客",
+    "link": "https://blog.civer.cn/"
+  },
+  {
+    "icon": "folder",
+    "name": "网盘",
+    "link": "https://revs.civer.cn/"
+  },
+  {
+    "icon": "music",
+    "name": "音乐",
+    "link": "https://meting-api.civer.cn/"
+  },
+  {
+    "icon": "mail",
+    "name": "邮件",
+    "link": "https://qiye.aliyun.com/"
+  },
+  {
+    "icon": "shield",
+    "name": "IDP",
+    "link": "https://idp.civer.cn/"
+  }
+]

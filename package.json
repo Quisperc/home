@@ -1,0 +1,25 @@
+{
+  "name": "home",
+  "author": "Quisper",
+  "github": "https://github.com/Quisperc/home",
+  "private": true,
+  "version": "5.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "node scripts/ensure-env.mjs && vite build",
+    "preview": "vite preview",
+    "format": "prettier --write src/",
+    "lint": "eslint . --ext .js,.vue --fix"
+  },
+  "dependencies": {
+    "vue": "^3.4.24"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.6.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.25.0",
+    "prettier": "^3.2.5",
+    "vite": "^4.5.3"
+  }
+}

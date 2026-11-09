@@ -1,0 +1,32 @@
+name: Deploy EdgeOne
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: cp .env.example .env
+      - run: npm run build
+      - name: Check deploy token
+        env:
+          EDGEONE_API_TOKEN: ${{ secrets.EDGEONE_API_TOKEN }}
+        run: |
+          if [ -z "$EDGEONE_API_TOKEN" ]; then
+            echo "::error::缺少仓库 Secret EDGEONE_API_TOKEN（EdgeOne 控制台 → API Token 创建）"
+            exit 1
+          fi
+      - name: Deploy to EdgeOne Makers
+        env:
+          EDGEONE_API_TOKEN: ${{ secrets.EDGEONE_API_TOKEN }}
+          PROJECT_NAME: ${{ vars.EDGEONE_PROJECT_NAME || 'home' }}
+        run: npx -y edgeone makers deploy dist -n "$PROJECT_NAME" -t "$EDGEONE_API_TOKEN" -e production --json

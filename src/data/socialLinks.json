@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Github",
+    "icon": "/images/icon/github.png",
+    "tip": "我的 Github",
+    "url": "https://github.com/Quisperc"
+  },
+  {
+    "name": "BiliBili",
+    "icon": "/images/icon/bilibili.png",
+    "tip": "我的 BiliBili",
+    "url": "https://space.bilibili.com/440516569"
+  },
+  {
+    "name": "QQ",
+    "icon": "/images/icon/qq.png",
+    "tip": "联系 QQ",
+    "url": "https://res.abeim.cn/api/qq/?qq=507678128"
+  },
+  {
+    "name": "Email",
+    "icon": "/images/icon/email.png",
+    "tip": "发送邮件",
+    "url": "mailto:Quisper@foxmail.com"
+  }
+]
