@@ -1,6 +1,7 @@
 import { reactive, watch } from "vue";
 
-const KEY = "home-settings";
+// v2：旧版保存的偏好曾固化旧默认壁纸，升键以重置为新默认（二次元）
+const KEY = "home-settings-v2";
 const defaults = {
   theme: "system", // light | dark | system
   seed: "auto", // auto = 跟随壁纸取色，或 #rrggbb
