@@ -3,11 +3,12 @@
   "author": "Quisper",
   "github": "https://github.com/Quisperc/home",
   "private": true,
-  "version": "5.0.0",
+  "version": "5.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "node scripts/ensure-env.mjs && vite build",
+    "build:ext": "node scripts/build-extension.mjs",
     "preview": "vite preview",
     "format": "prettier --write src/",
     "lint": "eslint . --ext .js,.vue --fix"

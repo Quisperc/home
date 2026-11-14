@@ -138,6 +138,31 @@ img {
   outline-offset: 2px;
 }
 
+/* 滚动条纳入调色板 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--md-primary) 45%, transparent) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--md-primary) 40%, transparent);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--md-primary) 65%, transparent);
+}
+
+/* 新标签页模式：更快的入场，减少等待感 */
+.nt .card {
+  animation-duration: 0.3s;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.25s var(--ease);

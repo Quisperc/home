@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Quisper 主页",
+  "version": "5.1.0",
+  "description": "把 Quisper 的个人主页设为新标签页：壁纸、时钟、搜索、博客与热榜。",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "icons": {
+    "16": "images/avatar.jpg",
+    "48": "images/avatar.jpg",
+    "128": "images/avatar.jpg"
+  }
+}

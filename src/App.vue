@@ -21,30 +21,39 @@
       </div>
     </header>
 
+    <SearchBar v-if="isNt" />
+
     <main class="grid">
       <ClockCard />
-      <HitokotoCard />
+      <HotCard v-if="hotOn" />
+      <BlogCard v-if="settings.blogShow" />
       <LinksCard />
-      <CapsuleCard />
+      <HitokotoCard v-if="!isNt" />
+      <CapsuleCard v-if="!isNt" />
     </main>
 
-    <Footer />
+    <Footer v-if="!isNt" />
   </div>
   <SettingsDialog v-model="setOpen" @shuffle="background?.shuffle()" />
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import Background from "@/components/Background.vue";
 import ClockCard from "@/components/ClockCard.vue";
+import HotCard from "@/components/HotCard.vue";
+import BlogCard from "@/components/BlogCard.vue";
 import HitokotoCard from "@/components/HitokotoCard.vue";
 import CapsuleCard from "@/components/CapsuleCard.vue";
 import LinksCard from "@/components/LinksCard.vue";
+import SearchBar from "@/components/SearchBar.vue";
 import Footer from "@/components/Footer.vue";
 import SettingsDialog from "@/components/SettingsDialog.vue";
 import Icon from "@/components/Icon.vue";
 import { settings } from "@/lib/settings";
 import { isDark } from "@/lib/theme";
+import { isNt } from "@/lib/nt";
+import { HOT_BASE } from "@/lib/hot";
 import { greeting, memorialDay } from "@/lib/time";
 
 const avatar = import.meta.env.VITE_SITE_MAIN_LOGO;
@@ -52,6 +61,7 @@ const bio = import.meta.env.VITE_DESC_TEXT;
 const hello = greeting();
 const setOpen = ref(false);
 const background = ref(null);
+const hotOn = computed(() => !!HOT_BASE && settings.hotShow);
 
 onMounted(() => {
   const day = memorialDay();
@@ -72,6 +82,10 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+:root.nt .page {
+  padding: clamp(12px, 2vw, 24px);
+  gap: 14px;
 }
 .top {
   display: flex;
@@ -115,17 +129,20 @@ onMounted(() => {
   gap: 16px;
   align-content: center;
 }
-/* iOS widget 尺寸：时钟 large(2x2)、一言/导航 medium(2x1)、胶囊 extra-large(4x1) */
-.clock-card {
+:root.nt .grid {
+  gap: 12px;
+}
+/* iOS widget 尺寸：时钟/热榜 large(2x2)，博客/导航/一言/胶囊 medium(2x1) */
+.clock-card,
+.hot-card {
   grid-column: span 2;
   grid-row: span 2;
 }
+.blog-card,
 .hitokoto-card,
-.links-card {
-  grid-column: span 2;
-}
+.links-card,
 .capsule-card {
-  grid-column: 1 / -1;
+  grid-column: span 2;
 }
 .grid > :nth-child(2) {
   animation-delay: 0.06s;
@@ -136,16 +153,29 @@ onMounted(() => {
 .grid > :nth-child(4) {
   animation-delay: 0.18s;
 }
+.grid > :nth-child(5) {
+  animation-delay: 0.24s;
+}
+.grid > :nth-child(6) {
+  animation-delay: 0.3s;
+}
+:root.nt .grid > * {
+  animation-delay: 0s;
+  animation-duration: 0.3s;
+}
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
-  .clock-card {
+  .clock-card,
+  .hot-card {
     grid-column: 1 / -1;
     grid-row: auto;
   }
+  .blog-card,
   .hitokoto-card,
-  .links-card {
+  .links-card,
+  .capsule-card {
     grid-column: auto;
   }
 }
@@ -154,6 +184,8 @@ onMounted(() => {
     grid-template-columns: 1fr;
   }
   .clock-card,
+  .hot-card,
+  .blog-card,
   .hitokoto-card,
   .links-card,
   .capsule-card {

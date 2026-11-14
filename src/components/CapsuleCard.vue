@@ -38,13 +38,8 @@ onBeforeUnmount(() => clearInterval(timer));
 <style scoped>
 .capsules {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-}
-@media (max-width: 900px) {
-  .capsules {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 @media (max-width: 600px) {
   .capsules {

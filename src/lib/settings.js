@@ -5,8 +5,11 @@ const KEY = "home-settings-v2";
 const defaults = {
   theme: "system", // light | dark | system
   seed: "auto", // auto = 跟随壁纸取色，或 #rrggbb
-  wallpaper: "acg", // local | bing | genshin | acg（默认二次元）
+  wallpaper: "acg", // local | bing | genshin | acg | blog（跟随博客）
   siteStartShow: true,
+  searchEngine: "bing", // 新标签页搜索：bing | google | baidu | duckduckgo
+  blogShow: true,
+  hotShow: true,
 };
 
 let saved = {};

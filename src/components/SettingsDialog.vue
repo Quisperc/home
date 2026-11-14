@@ -50,6 +50,39 @@
                   <Icon name="refresh" :size="18" />换一张
                 </button>
               </div>
+              <p class="hint">「博客」同步博客站点的壁纸与主题色，无需改动博客</p>
+            </section>
+
+            <section v-if="isNt">
+              <h3>搜索引擎</h3>
+              <div class="segmented">
+                <label v-for="opt in engines" :key="opt.value">
+                  <input v-model="settings.searchEngine" type="radio" :value="opt.value" />
+                  <span>{{ opt.label }}</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="switch-row">
+              <div>
+                <h3>博客文章卡片</h3>
+                <p class="hint">展示博客最新三篇文章</p>
+              </div>
+              <label class="switch">
+                <input v-model="settings.blogShow" type="checkbox" />
+                <span class="track"><span class="thumb" /></span>
+              </label>
+            </section>
+
+            <section v-if="hotAvailable" class="switch-row">
+              <div>
+                <h3>今日热榜卡片</h3>
+                <p class="hint">聚合各平台实时热榜</p>
+              </div>
+              <label class="switch">
+                <input v-model="settings.hotShow" type="checkbox" />
+                <span class="track"><span class="thumb" /></span>
+              </label>
             </section>
 
             <section class="switch-row">
@@ -79,22 +112,32 @@ import { watch } from "vue";
 import Icon from "./Icon.vue";
 import { settings } from "@/lib/settings";
 import { SEEDS } from "@/lib/theme";
+import { isNt } from "@/lib/nt";
+import { HOT_BASE } from "@/lib/hot";
 import { version, github } from "@/../package.json";
 
 const props = defineProps({ modelValue: Boolean });
 const emit = defineEmits(["update:modelValue", "shuffle"]);
 const close = () => emit("update:modelValue", false);
 
+const hotAvailable = !!HOT_BASE;
 const themes = [
   { label: "浅色", value: "light" },
   { label: "深色", value: "dark" },
   { label: "跟随系统", value: "system" },
 ];
 const wallpapers = [
-  { label: "内置渐变", value: "local" },
-  { label: "每日一图", value: "bing" },
+  { label: "渐变", value: "local" },
+  { label: "必应", value: "bing" },
   { label: "原神", value: "genshin" },
   { label: "二次元", value: "acg" },
+  { label: "博客", value: "blog" },
+];
+const engines = [
+  { label: "必应", value: "bing" },
+  { label: "谷歌", value: "google" },
+  { label: "百度", value: "baidu" },
+  { label: "DuckDuckGo", value: "duckduckgo" },
 ];
 
 const onKeydown = (e) => e.key === "Escape" && close();
