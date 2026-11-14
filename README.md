@@ -52,6 +52,11 @@ npm run build:ext      # 新标签页扩展产物在 dist-ext/
 
 构建时 `scripts/ensure-env.mjs` 自动从 `.env.example` 生成 `.env`，避免 `%VITE_*%` 未定义导致 `URI malformed` 构建失败；Node 由 `.nvmrc` 固定为 **24.18.0**（Makers 会下载该非预装版本，仅自带 npm，故安装命令用 `npm ci`）。本地 Node 不受 `.nvmrc` 影响（nvm 默认不自动切换）。
 
+### 联动功能的平台配置（一次性）
+
+- **博客联动**：在 EdgeOne 控制台为 `blog.civer.cn` 增加响应头 `Access-Control-Allow-Origin: *`（规则引擎 → 修改响应头，博客内容为公开内容）。未配置时文章卡片显示重试态、「博客」壁纸保留上一张或回退渐变，不影响其余功能。
+- **今日热榜**：将 [NewsNow](https://github.com/ourongxing/newsnow)（MIT）部署到 EdgeOne Makers 并绑定域名（如 `hot.civer.cn`，需 DNS + SSL + 同样的 CORS 响应头）。确认 `/api/s?id=weibo` 返回 JSON 后，在 `.env` 启用 `VITE_HOT_API_BASE` 并重新构建，热榜卡片与设置开关自动出现。注意核实 Makers 对 NewsNow 服务端运行时（nitro 产物）的支持；若仅支持静态托管，需改用其 Node 预设或其他托管方式。
+
 ## 许可证
 
 [MIT](LICENSE) · Copyright (c) 2026 Quisper
