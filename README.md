@@ -54,8 +54,8 @@ npm run build:ext      # 新标签页扩展产物在 dist-ext/
 
 ### 联动功能的平台配置（一次性）
 
-- **博客联动**：在 EdgeOne 控制台为 `blog.civer.cn` 增加响应头 `Access-Control-Allow-Origin: *`（规则引擎 → 修改响应头，博客内容为公开内容）。未配置时文章卡片显示重试态、「博客」壁纸保留上一张或回退渐变，不影响其余功能。
-- **今日热榜**：将 [NewsNow](https://github.com/ourongxing/newsnow)（MIT）部署到 EdgeOne Makers 并绑定域名（如 `hot.civer.cn`，需 DNS + SSL + 同样的 CORS 响应头）。确认 `/api/s?id=weibo` 返回 JSON 后，在 `.env` 启用 `VITE_HOT_API_BASE` 并重新构建，热榜卡片与设置开关自动出现。注意核实 Makers 对 NewsNow 服务端运行时（nitro 产物）的支持；若仅支持静态托管，需改用其 Node 预设或其他托管方式。
+- **博客联动**：Makers 无规则引擎，改在 Firefly 仓库根目录的 `edgeone.json` 用 `headers` 字段为全站（`/*`）配置响应头 `Access-Control-Allow-Origin: *`（博客内容为公开内容）。该文件仅含 `headers` 时逐项覆盖、不影响控制台既有构建配置；推送后 Makers 自动重建生效。未配置时文章卡片显示重试态、「博客」壁纸保留上一张或回退渐变，不影响其余功能。
+- **今日热榜**：将 [NewsNow](https://github.com/ourongxing/newsnow)（MIT）部署到 EdgeOne Makers 并绑定域名（如 `hot.civer.cn`，需 DNS + SSL）。Makers 纯静态托管无法运行其 nitro 服务端，故在 NewsNow 仓库加入：`EDGEONE` 构建分支（nitro `node-listener` 预设、`database` 置空走实时抓取）、`cloud-functions/api/[[default]].js`（Express 框架模式承载 nitro 监听器，根级 catch-all 复现完整服务）、`edgeone.json`（`EDGEONE=1` 构建、`/*` CORS 响应头、`cloudFunctions.nodejs.includeFiles` 纳入服务端产物）。推送后 Makers 自动重建，云函数提供完整 `/api/*`（未配置 JWT 时登录禁用，但 `/api/s`、`/api/latest` 公开可用）。确认 `/api/s?id=weibo` 返回 JSON 后，在 `.env` 启用 `VITE_HOT_API_BASE` 并重新构建，热榜卡片与设置开关自动出现。
 
 ## 许可证
 
