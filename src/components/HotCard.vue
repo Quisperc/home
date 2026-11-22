@@ -93,6 +93,8 @@ onBeforeUnmount(() => clearInterval(timer));
 
 <style scoped>
 .hot-card {
+  /* 列表高度上下限：同一变量供骨架态与数据态共用，消除切换跳变 */
+  --hot-list-max: clamp(240px, 40vh, 400px);
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -142,8 +144,11 @@ onBeforeUnmount(() => clearInterval(timer));
 }
 .list {
   flex: 1;
-  min-height: 0;
+  /* 父级为 auto 行网格项，高度不确定；显式上限让 overflow 真正生效，根治列表撑高整行 */
+  max-height: var(--hot-list-max);
+  min-height: min(300px, var(--hot-list-max));
   overflow-y: auto;
+  overflow-x: hidden;
   list-style: none;
   padding: 0 4px 0 0;
   margin: 0;
@@ -151,6 +156,7 @@ onBeforeUnmount(() => clearInterval(timer));
 .row {
   display: flex;
   align-items: center;
+  min-width: 0;
   gap: 10px;
   padding: 7px 10px;
   border-radius: 12px;
@@ -183,6 +189,7 @@ onBeforeUnmount(() => clearInterval(timer));
   opacity: 1;
 }
 .title {
+  display: block;
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -195,7 +202,9 @@ onBeforeUnmount(() => clearInterval(timer));
 }
 .heat {
   flex: none;
-  max-width: 34%;
+  /* 封顶绝对值，避免长标题来源（知乎）的徽章按比例挤占标题空间 */
+  max-width: min(34%, 108px);
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -206,6 +215,9 @@ onBeforeUnmount(() => clearInterval(timer));
 }
 .skeleton {
   flex: 1;
+  /* 与 .list 共用高度上下限，骨架态 → 数据态高度基本一致 */
+  max-height: var(--hot-list-max);
+  min-height: min(300px, var(--hot-list-max));
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -254,5 +266,14 @@ onBeforeUnmount(() => clearInterval(timer));
 }
 .text-btn:hover {
   background: color-mix(in srgb, var(--md-primary) 10%, transparent);
+}
+/* 手机端：整体收紧列表高度，让出空间给标题 */
+@media (max-width: 600px) {
+  .hot-card {
+    --hot-list-max: 280px;
+  }
+  .heat {
+    max-width: 72px;
+  }
 }
 </style>
