@@ -31,7 +31,7 @@
       <li v-for="(item, i) in items.slice(0, 10)" :key="item.id ?? i">
         <a class="row" :href="item.url" target="_blank" rel="noopener">
           <span class="rank" :class="`r${i + 1}`">{{ i + 1 }}</span>
-          <span class="title">{{ item.title }}</span>
+          <span class="title" :title="item.title">{{ item.title }}</span>
           <span v-if="item.extra?.info" class="heat">{{ item.extra.info }}</span>
         </a>
       </li>
@@ -267,6 +267,20 @@ onBeforeUnmount(() => clearInterval(timer));
 }
 .text-btn:hover {
   background: color-mix(in srgb, var(--md-primary) 10%, transparent);
+}
+/* 手机 + Pad：标题两行显示，行内元素与首行对齐 */
+@media (max-width: 900px) {
+  .row {
+    align-items: flex-start;
+  }
+  .title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    text-overflow: clip;
+    line-height: 1.35;
+  }
 }
 /* 手机端：整体收紧列表高度，让出空间给标题 */
 @media (max-width: 600px) {

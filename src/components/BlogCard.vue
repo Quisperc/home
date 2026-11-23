@@ -23,7 +23,7 @@
         rel="noopener"
       >
         <span v-if="post.category" class="chip">{{ post.category }}</span>
-        <span class="post-title">{{ post.title }}</span>
+        <span class="post-title" :title="post.title">{{ post.title }}</span>
         <time class="date">{{ post.publishedDate }}</time>
       </a>
     </template>
