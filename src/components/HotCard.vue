@@ -98,6 +98,7 @@ onBeforeUnmount(() => clearInterval(timer));
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
 }
 .updated {
   margin-left: auto;
@@ -146,7 +147,7 @@ onBeforeUnmount(() => clearInterval(timer));
   flex: 1;
   /* 父级为 auto 行网格项，高度不确定；显式上限让 overflow 真正生效，根治列表撑高整行 */
   max-height: var(--hot-list-max);
-  min-height: min(300px, var(--hot-list-max));
+  min-height: var(--hot-list-max);
   overflow-y: auto;
   overflow-x: hidden;
   list-style: none;
@@ -217,7 +218,7 @@ onBeforeUnmount(() => clearInterval(timer));
   flex: 1;
   /* 与 .list 共用高度上下限，骨架态 → 数据态高度基本一致 */
   max-height: var(--hot-list-max);
-  min-height: min(300px, var(--hot-list-max));
+  min-height: var(--hot-list-max);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -272,8 +273,11 @@ onBeforeUnmount(() => clearInterval(timer));
   .hot-card {
     --hot-list-max: 280px;
   }
+  .card-title {
+    flex-wrap: wrap;
+  }
   .heat {
-    max-width: 72px;
+    max-width: 56px;
   }
 }
 </style>

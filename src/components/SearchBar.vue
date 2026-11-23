@@ -118,4 +118,15 @@ input::placeholder {
   opacity: 0.4;
   cursor: default;
 }
+/* NT 手机端：收紧引擎选择器并固定输入框收缩基准，避免输入框被过度压缩 */
+@media (max-width: 600px) {
+  :root.nt .engine {
+    max-width: 88px;
+    padding: 6px 6px;
+  }
+  :root.nt input {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
 </style>

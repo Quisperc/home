@@ -129,6 +129,9 @@ onMounted(() => {
   gap: 16px;
   align-content: center;
 }
+.grid > * {
+  min-width: 0;
+}
 :root.nt .grid {
   gap: 12px;
 }

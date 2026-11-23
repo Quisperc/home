@@ -122,11 +122,19 @@ onBeforeUnmount(() => clearInterval(timer));
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 10px 14px;
   border-radius: 999px;
   font-size: clamp(0.78rem, 3.2cqi, 0.9rem);
   color: var(--md-on-surface-variant);
   background: color-mix(in srgb, var(--md-surface-container-high) 55%, transparent);
   border: 1px solid color-mix(in srgb, var(--md-on-surface) 8%, transparent);
+}
+@media (max-width: 600px) {
+  .clock-card {
+    padding: 16px;
+  }
 }
 </style>

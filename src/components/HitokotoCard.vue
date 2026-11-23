@@ -68,6 +68,10 @@ onMounted(load);
 }
 .from {
   align-self: flex-end;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 0.9rem;
   color: var(--md-on-surface-variant);
 }

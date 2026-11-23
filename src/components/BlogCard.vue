@@ -77,6 +77,10 @@ onMounted(load);
 }
 .chip {
   flex: none;
+  max-width: 35%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   padding: 2px 9px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -97,6 +101,7 @@ onMounted(load);
 }
 .date {
   flex: none;
+  white-space: nowrap;
   font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
   color: var(--md-on-surface-variant);

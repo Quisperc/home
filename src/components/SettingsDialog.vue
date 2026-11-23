@@ -382,4 +382,24 @@ h3 {
 .dialog-leave-to .dialog {
   transform: scale(0.95);
 }
+/* 手机端收敛：分段控件换行、文字与弹窗内边距收紧、壁纸行纵向堆叠 */
+@media (max-width: 600px) {
+  .dialog {
+    padding: 16px;
+  }
+  .segmented {
+    flex-wrap: wrap;
+  }
+  .segmented span {
+    padding: 7px 8px;
+    font-size: 0.82rem;
+  }
+  .wallpaper-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .switch-row > div {
+    min-width: 0;
+  }
+}
 </style>

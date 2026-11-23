@@ -40,7 +40,7 @@ import socials from "@/data/socialLinks.json";
 <style scoped>
 .sites {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr));
   gap: 8px;
 }
 .site {
@@ -66,6 +66,7 @@ import socials from "@/data/socialLinks.json";
   color: var(--md-on-primary-container);
 }
 .site-name {
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

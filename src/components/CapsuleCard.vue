@@ -52,11 +52,18 @@ onBeforeUnmount(() => clearInterval(timer));
   margin-bottom: 6px;
   font-size: 0.9rem;
 }
+.row > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .dim,
 .pct {
   color: var(--md-on-surface-variant);
 }
 .pct {
+  flex: none;
   font-variant-numeric: tabular-nums;
 }
 .track {
