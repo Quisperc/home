@@ -3,7 +3,8 @@
     <p class="date">{{ now.date }}</p>
     <div class="dial">
       <svg class="face" viewBox="0 0 200 200" role="img" :aria-label="now.hm">
-        <g class="ticks">
+        <!-- 60 条刻度是静态的，用 v-once 隔离，避免每秒随秒针更新参与 diff -->
+        <g class="ticks" v-once>
           <line
             v-for="i in 60"
             :key="i"
@@ -25,7 +26,7 @@
       </time>
     </div>
     <p class="weather">
-      <Icon name="cloud" :size="16" />
+      <Icon name="cloud" :size="18" />
       <span v-if="weather">{{ weather.city }} · {{ weather.text }} {{ weather.temp }}℃</span>
       <span v-else>{{ weatherError ? "天气暂不可用" : "天气加载中…" }}</span>
     </p>

@@ -31,7 +31,8 @@ const uptimeText = computed(() =>
 );
 let timer;
 
-onMounted(() => (timer = setInterval(() => (items.value = capsule()), 1000)));
+// 胶囊按「小时/天」计量，秒级刷新无视觉收益；30s 粒度配合 0.6s 过渡已足够连续
+onMounted(() => (timer = setInterval(() => (items.value = capsule()), 30_000)));
 onBeforeUnmount(() => clearInterval(timer));
 </script>
 

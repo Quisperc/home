@@ -72,27 +72,26 @@ async function load(force = false) {
     return;
   }
 
-  // 博客壁纸：主题色 + 壁纸池
+  // 博客壁纸：主题色 + 壁纸池。主题解析与缓存读取互不依赖，并行发起以缩短首帧
+  const themeP = force ? Promise.resolve(null) : getBlogTheme().catch(() => null);
+  const cacheP = force ? Promise.resolve(null) : cacheGet();
+  const [theme, cached] = await Promise.all([themeP, cacheP]);
+  if (id !== loadId) return;
+
   let url = null;
-  try {
-    const theme = await getBlogTheme();
-    if (id !== loadId) return;
+  if (theme) {
     blogPool = theme.pool;
     blogHue.value = theme.hue;
     if (theme.hue != null) setWallpaperSeed(hslToHex(theme.hue, 62, 52));
     url = blogPool[blogPick % blogPool.length] || null;
-  } catch {
+  } else {
     blogHue.value = null;
   }
 
-  if (!force) {
-    const cached = await cacheGet();
-    if (id !== loadId) return;
-    // 缓存先上屏保证首帧；新标签页模式到此为止（零网络等待）
-    if (cached) {
-      showBlob(cached);
-      if (isNt) return;
-    }
+  // 缓存先上屏保证首帧；新标签页模式到此为止（零网络等待）
+  if (cached) {
+    showBlob(cached);
+    if (isNt) return;
   }
   if (!url) {
     if (!imgUrl.value) failed.value = true;
