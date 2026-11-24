@@ -59,27 +59,18 @@ img {
   display: block;
 }
 
-/* 卡片：Liquid Glass（半透明 + 折射高光 + 光泽），色彩 token 由 theme.js 注入 */
+/* 卡片：安静的半透明承载面。收敛玻璃拟态——去掉多余内高光与彩色阴影，
+   仅保留一层极轻的顶部发丝线；壁纸与主题色是屏幕唯一的高光。 */
 .card {
-  background:
-    linear-gradient(
-      155deg,
-      rgb(255 255 255 / var(--glass-sheen)),
-      rgb(255 255 255 / calc(var(--glass-sheen) * 0.35)) 30%,
-      transparent 55%
-    ),
-    color-mix(in srgb, var(--md-surface-container) 68%, transparent);
-  -webkit-backdrop-filter: blur(30px) saturate(1.8);
-  backdrop-filter: blur(30px) saturate(1.8);
+  background: color-mix(in srgb, var(--md-surface-container) 78%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.35);
+  backdrop-filter: blur(16px) saturate(1.35);
   border: 1px solid color-mix(in srgb, var(--md-on-surface) 10%, transparent);
   border-radius: var(--radius-card);
   padding: 24px;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / var(--glass-spec)),
-    inset 0 0 0 1px rgb(255 255 255 / 4%),
-    inset 0 -1px 0 rgb(0 0 0 / 10%),
-    0 8px 24px -10px rgb(0 0 0 / 0.28),
-    0 2px 6px rgb(0 0 0 / 0.1);
+    inset 0 1px 0 rgb(255 255 255 / calc(var(--glass-spec) * 0.5)),
+    0 8px 24px -12px rgb(0 0 0 / 0.22);
   animation: rise 0.5s var(--ease) backwards;
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {

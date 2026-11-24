@@ -12,7 +12,7 @@
       >
         <span class="site-icon"><Icon :name="site.icon" :size="22" /></span>
         <span class="site-name">{{ site.name }}</span>
-        <Icon class="outward" name="outward" :size="16" />
+        <Icon class="outward" name="outward" :size="18" />
       </a>
     </div>
     <div class="social">

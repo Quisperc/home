@@ -54,15 +54,13 @@ onMounted(() => input.value?.focus());
   gap: 10px;
   padding: 8px 10px 8px 20px;
   border-radius: 999px;
-  background:
-    linear-gradient(155deg, rgb(255 255 255 / var(--glass-sheen)), transparent 55%),
-    color-mix(in srgb, var(--md-surface-container) 72%, transparent);
-  -webkit-backdrop-filter: blur(30px) saturate(1.8);
-  backdrop-filter: blur(30px) saturate(1.8);
+  background: color-mix(in srgb, var(--md-surface-container) 80%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.35);
+  backdrop-filter: blur(16px) saturate(1.35);
   border: 1px solid color-mix(in srgb, var(--md-on-surface) 10%, transparent);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / var(--glass-spec)),
-    0 8px 24px -10px rgb(0 0 0 / 0.28);
+    inset 0 1px 0 rgb(255 255 255 / calc(var(--glass-spec) * 0.5)),
+    0 8px 24px -12px rgb(0 0 0 / 0.22);
   animation: rise 0.4s var(--ease) 0.05s backwards;
   transition: border-color 0.2s var(--ease);
 }
@@ -108,11 +106,11 @@ input::placeholder {
   background: var(--md-primary);
   color: var(--md-on-primary);
   transition:
-    opacity 0.2s var(--ease),
-    transform 0.2s var(--ease);
+    background-color 0.2s var(--ease),
+    opacity 0.2s var(--ease);
 }
 .go:hover:not(:disabled) {
-  transform: scale(1.06);
+  background: color-mix(in srgb, var(--md-primary) 88%, var(--md-on-surface));
 }
 .go:disabled {
   opacity: 0.4;

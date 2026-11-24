@@ -127,7 +127,8 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  align-content: center;
+  /* safe：空间足够时垂直居中，内容超高时退化为起点对齐，避免顶部被挤出且无法滚动 */
+  align-content: safe center;
 }
 .grid > * {
   min-width: 0;
@@ -147,21 +148,8 @@ onMounted(() => {
 .capsule-card {
   grid-column: span 2;
 }
-.grid > :nth-child(2) {
-  animation-delay: 0.06s;
-}
-.grid > :nth-child(3) {
-  animation-delay: 0.12s;
-}
-.grid > :nth-child(4) {
-  animation-delay: 0.18s;
-}
-.grid > :nth-child(5) {
-  animation-delay: 0.24s;
-}
-.grid > :nth-child(6) {
-  animation-delay: 0.3s;
-}
+/* 统一单次淡入：卡片受 v-if 条件渲染，nth-child 错峰会与实际卡位数错位；
+   改为整组统一节奏，避免逐张飞入。入场只发生一次。 */
 :root.nt .grid > * {
   animation-delay: 0s;
   animation-duration: 0.3s;
